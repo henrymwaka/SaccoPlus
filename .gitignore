@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+env/
+*.sqlite3
+
+# Node
+node_modules/
+dist/
+
+# Flutter
+build/
+*.lock
+.packages
+.pub-cache/
+
+# OS
+.DS_Store
+
+# VSCode
+.vscode/
