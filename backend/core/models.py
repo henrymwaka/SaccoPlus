@@ -7,9 +7,21 @@ class Member(models.Model):
     member_id = models.CharField(max_length=20, unique=True)
     phone = models.CharField(max_length=15)
     join_date = models.DateField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"{self.user.get_full_name()} ({self.member_id})"
+
+# 1b. BIOGRAPHIC INFO
+class BiographicInfo(models.Model):
+    member = models.OneToOneField(Member, on_delete=models.CASCADE)
+    date_of_birth = models.DateField(null=True, blank=True)
+    address = models.TextField(blank=True)
+    occupation = models.CharField(max_length=100, blank=True)
+    gender = models.CharField(max_length=10, blank=True)
+    id_number = models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        return f"{self.member} - {self.id_number}"
 
 # 2. SAVINGS
 class Savings(models.Model):
@@ -44,6 +56,16 @@ class Loan(models.Model):
     def __str__(self):
         return f"Loan {self.id} for {self.member}"
 
+# 3b. CREDIT HISTORY
+class CreditHistory(models.Model):
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    loan = models.ForeignKey(Loan, null=True, blank=True, on_delete=models.SET_NULL)
+    event = models.CharField(max_length=100)  # e.g., 'Loan Approved', 'Defaulted'
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.member} - {self.event} on {self.timestamp.date()}"
+
 # 4. LOAN REPAYMENTS
 class LoanRepayment(models.Model):
     loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
@@ -53,7 +75,7 @@ class LoanRepayment(models.Model):
     def __str__(self):
         return f"Repayment of UGX {self.amount} for Loan {self.loan.id}"
 
-# 5. UNIT TRUST RETURNS
+# 5. UNIT TRUST RETURNS (ANNUALIZED)
 class UnitTrustEarning(models.Model):
     date = models.DateField()
     rate_percent = models.DecimalField(max_digits=5, decimal_places=2)
@@ -61,6 +83,21 @@ class UnitTrustEarning(models.Model):
 
     def __str__(self):
         return f"{self.date} - {self.rate_percent}%"
+
+# 5b. UNIT TRUST LEDGER (MOVEMENTS IN/OUT)
+class UnitTrustLedger(models.Model):
+    TRANSACTION_TYPE = (
+        ('deposit', 'Deposit into Unit Trust'),
+        ('withdrawal', 'Withdrawal for Loans'),
+        ('interest', 'Earned Interest'),
+    )
+    transaction_type = models.CharField(max_length=20, choices=TRANSACTION_TYPE)
+    amount = models.DecimalField(max_digits=12, decimal_places=2)
+    date = models.DateField(auto_now_add=True)
+    note = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.date} - {self.transaction_type} - UGX {self.amount}"
 
 # 6. YEAR-END INTEREST SHARING
 class InterestSharing(models.Model):
