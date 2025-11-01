@@ -1,21 +1,132 @@
-# Python
-__pycache__/
-*.pyc
-env/
-*.sqlite3
+# ===========================================
+# ✅ Unified .gitignore for SaccoPlus Project
+# Combines local rules + standard Python/Django ignores
+# ===========================================
 
-# Node
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# --- Environments ---
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Databases ---
+*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+
+# --- Build / Packaging ---
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- PyInstaller ---
+*.manifest
+*.spec
+
+# --- Logs / Tests ---
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# --- Translations ---
+*.mo
+*.pot
+
+# --- Django ---
+local_settings.py
+media/
+staticfiles/
+static/
+collectstatic/
+
+# --- Flask ---
+instance/
+.webassets-cache
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+.spyderproject
+.spyproject
+.ropeproject
+
+# --- Jupyter ---
+.ipynb_checkpoints
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Node / Frontend ---
 node_modules/
 dist/
 
-# Flutter
+# --- Flutter ---
 build/
 *.lock
 .packages
 .pub-cache/
 
-# OS
-.DS_Store
+# --- Ruff / Linter ---
+.ruff_cache/
 
-# VSCode
-.vscode/
+# --- Type checker caches ---
+.mypy_cache/
+.pyre/
+.pytype/
+.dmypy.json
+dmypy.json
+
+# --- Cython debug symbols ---
+cython_debug/
+
+# --- Docs ---
+/site
+docs/_build/
+
+# --- Abstra / Cursor ---
+.abstra/
+.cursorignore
+.cursorindexingignore
+
+# --- Marimo ---
+marimo/_static/
+marimo/_lsp/
+__marimo__/
