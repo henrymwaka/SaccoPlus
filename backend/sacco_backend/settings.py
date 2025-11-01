@@ -23,10 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_oify-q=a_(ymv1kz66bo=e6+0zef&7_#mdn4#ctxgg4ic!v7u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '5f5100fcc4eb.ngrok-free.app']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'saccoplus.reslab.dev']
 
 # Application definition
 
@@ -123,8 +122,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/shaykins/Projects/SaccoPlus/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/home/shaykins/Projects/SaccoPlus/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
